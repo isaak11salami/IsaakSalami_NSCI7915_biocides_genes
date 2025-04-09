@@ -1,0 +1,91 @@
+#Importing data
+library(readr)
+tps <- read_csv("data/raw/transporters.csv")
+View(tps)
+
+#Will try to process this data using the same method that John walked me
+#through in the "General Analysis" file
+
+#Formatting data
+tps = as.data.frame(tps)
+#Isolate our gene names from the 3rd column, starting at the 3rd row and
+#continuing donward
+genename=tps[3:nrow(tps),3]
+genename
+#This cuts out the first two columns of tps
+
+tps=tps[,1:ncol(tps) %% 3==2]
+#Okay. So, what did this just do?
+#From Qwen 2.5-Max: Subsets the columns of the tps data frame based on 
+#a condition involving the modulo operator (%%). Specifically: 1:ncol(tps) 
+#generates a sequence of integers from 1 to the total number of columns in 
+#tps. %% 3 == 2 checks which column indices satisfy the condition "remainder 
+#when divided by 3 equals 2."Only the columns whose indices meet this 
+#condition are retained.
+#So, we are isolating every 3rd column (the ones with the logFC values, which
+#we care about)
+
+headers=tps[,]
+tps
+
+tps=tps[,-1]
+tps=tps[-(1:2),]
+#This removes the first two column of unecessry data (which aren't logFC values)
+#from the dataframe
+
+tps=matrix(as.numeric(unlist(tps)),nrow(tps),ncol(tps))
+head(tps)
+
+#Plot a Dendrogram to get a sense of the data
+plot(hclust(dist(tps)))
+#Okay, so we have two distinct clusters yet again
+
+h=hclust(dist(t(tps)))
+plot(h)
+h
+
+#Fixing up the headers
+headers
+headers=as.character(headers)
+is.character(headers)
+
+rowSums(tps)
+#Caluclate the princible components of the cells
+princomp(tps)
+#Skree plot to show PCA
+plot(princomp(tps)$sdev)
+plot(princomp(tps)$loadings,cex=0)
+text(princomp(tps)$loadings,labels=headers,xpd=NA)
+#When considering the loadings, the Comp.1 vs Comp.2 graph is very messy
+
+#Let's look at scores instead of loadings
+plot(princomp(tps)$scores,cex=0)
+text(princomp(tps)$scores,labels=genename,xpd=NA)
+
+plot(factanal(tps,factors=2,scores='regression')$scores,cex=0)
+text(factanal(tps,factors=2,scores='regression')$scores,labels=genename,xpd=NA)
+factor=factanal(tps,factors=4,scores='regression')
+factor
+
+factor$loadings
+
+factor$scores
+plot(factor$scores, cex=0)
+text(factor$scores, cex=0.5, labels=genename)
+#Okay thus plot is pretty interesting. We have three loose bunchings,
+#plus a couple of outliers
+
+#What happens if we change the numer of factors that we are considerng? That
+#example used 4 factors. What if we reduced this to 3?
+plot(factanal(tps,factors=2,scores='regression')$scores,cex=0)
+text(factanal(tps,factors=2,scores='regression')$scores,labels=genename,xpd=NA)
+factor=factanal(tps,factors=3,scores='regression')
+factor
+
+factor$loadings
+
+factor$scores
+plot(factor$scores, cex=0)
+text(factor$scores, cex=0.5, labels=genename)
+#Okay yep the plot is pretty different. This MIGHT be more appropriate?
+#Will need to read up on the impact of chnaging the factors in pca factor analysis
