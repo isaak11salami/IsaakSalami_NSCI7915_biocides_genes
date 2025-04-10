@@ -89,3 +89,5 @@ plot(factor$scores, cex=0)
 text(factor$scores, cex=0.5, labels=genename)
 #Okay yep the plot is pretty different. This MIGHT be more appropriate?
 #Will need to read up on the impact of chnaging the factors in pca factor analysis
+
+citation()
