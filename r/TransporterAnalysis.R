@@ -4,7 +4,12 @@
 
 #Importing data
 library(readr)
-tps <- read_csv("data/raw/transporters.csv")
+
+#let's set the working directory
+
+setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NSCI7915/Assessments/DataProject/data/raw")
+
+tps <- read_csv("transporters.csv")
 View(tps)
 
 #Will try to process this data using the same method that John walked me
@@ -34,7 +39,7 @@ tps
 
 tps=tps[,-1]
 tps=tps[-(1:2),]
-#This removes the first two column of unecessry data (which aren't logFC values)
+#This removes the first column and first two rowns of unnecessary data (which aren't logFC values)
 #from the dataframe
 
 tps=matrix(as.numeric(unlist(tps)),nrow(tps),ncol(tps))
@@ -92,6 +97,46 @@ factor$scores
 plot(factor$scores, cex=0)
 text(factor$scores, cex=0.5, labels=genename)
 #Okay yep the plot is pretty different. This MIGHT be more appropriate?
-#Will need to read up on the impact of chnaging the factors in pca factor analysis
+#Will need to read up on the impact of changing the factors in pca factor analysis
+
+#What if we tried some more factors? Let's try 5
+plot(factanal(tps,factors=5,scores='regression')$scores,cex=0)
+text(factanal(tps,factors=5,scores='regression')$scores,labels=genename,xpd=NA)
+factor=factanal(tps,factors=5,scores='regression')
+factor
+
+factor$loadings
+
+factor$scores
+plot(factor$scores, cex=0)
+text(factor$scores, cex=0.5, labels=genename)
+
+#Very different again. I'd say that 4 factors is the sweet spot. What about less factors though?
+#2 factors
+plot(factanal(tps,factors=2,scores='regression')$scores,cex=0)
+text(factanal(tps,factors=2,scores='regression')$scores,labels=genename,xpd=NA)
+factor=factanal(tps,factors=2,scores='regression')
+factor
+
+factor$loadings
+
+factor$scores
+plot(factor$scores, cex=0)
+text(factor$scores, cex=0.5, labels=genename)
+#2 factors is pretty similar to 3 factors
+
+#1 factor
+plot(factanal(tps,factors=1,scores='regression')$scores,cex=0)
+text(factanal(tps,factors=1,scores='regression')$scores,labels=genename,xpd=NA)
+factor=factanal(tps,factors=1,scores='regression')
+factor
+
+factor$loadings
+
+factor$scores
+plot(factor$scores, cex=0)
+text(factor$scores, cex=0.5, labels=genename)
+#data is just all over the place. I'd say 4 factors is the sweet spot!
 
 citation()
+
