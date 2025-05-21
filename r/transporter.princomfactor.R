@@ -152,4 +152,4 @@ factor$scores
 plot(factor$scores, cex=0)
 text(factor$scores, cex=0.5, labels=genename)
 
-#
+
