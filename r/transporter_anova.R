@@ -6,7 +6,7 @@ View(tav)
 tav
 
 
-#Let's start with a ONE-Way ANOVA (only consider nodulation group)
+#Let's start with a ONE-Way ANOVA (only consider biocide group)
 
 tav.model=aov(logFC~biocide, tav)
 tav.model
