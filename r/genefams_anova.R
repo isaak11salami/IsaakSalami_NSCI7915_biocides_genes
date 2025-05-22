@@ -8,8 +8,25 @@ setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NS
 pumpdata<- read_csv("abc_pumps.csv")
 View(pumpdata)
 
+#Effect of biocides
 biomod <- aov(logFC~biocide, data=pumpdata)
+
+#Check Assumptions
+#1) Homogeneity of Variance, via...
+#Levene Test
+library(car)
+leveneTest(biomod)
+
+#Plot Residuals against Fitted values
+#2) Normality of Variance, via...
+#Q-Q plot
+plot(biomod)
+#Not equal variances, but that is to be expected due to the different
+#genes in the family. Let's proceed with the analysis anyway
+
 anova(biomod)
+
+#which groups differ?
 biomod_tukey <- TukeyHSD(biomod)
 print(biomod_tukey)
 
@@ -31,6 +48,18 @@ biomod_sigcompare
 
 #Now let's look at logFC differences between our ABC transporters
 fammod <- aov(logFC~family, data=pumpdata)
+
+#Check Assumptions
+#1) Homogeneity of Variance, via...
+#Levene Test
+leveneTest(fammod)
+#Plot Residuals against Fitted values
+plot(fammod)
+
+#2) Normality of Variance, via...
+#Q-Q plot
+plot(fammod)
+
 anova(fammod)
 
 fammod_tukey <- TukeyHSD(fammod)
@@ -45,6 +74,20 @@ fammod_sigcompare
 #Now let's look for interaction between ABC pumps and biocide (do the 
 #biocides impact certain pumps in a unique manner?)
 biofam <- aov(logFC~family*biocide, data=pumpdata)
+
+#Check Assumptions
+#1) Homogeneity of Variance, via...
+#Levene Test
+leveneTest(biofam)
+#Passes the Levene's Test!
+
+#Plot Residuals against Fitted values
+plot(biofam)
+
+#2) Normality of Variance, via...
+#Q-Q plot
+plot(biofam)
+
 anova(biofam)
 
 #TukeyHSD to look at comparisons between the interaction groups (aidded by QwenAI)

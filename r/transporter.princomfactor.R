@@ -73,8 +73,8 @@ text(princomp(tps)$loadings,labels=headers,xpd=NA)
 plot(princomp(tps)$scores,cex=0)
 text(princomp(tps)$scores,labels=genename,xpd=NA)
 
-plot(factanal(tps,factors=2,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=2,scores='regression')$scores,labels=genename,xpd=NA)
+plot(factanal(tps,factors=4,scores='regression')$scores,cex=0)
+text(factanal(tps,factors=4,scores='regression')$scores,labels=genename,xpd=NA)
 factor=factanal(tps,factors=4,scores='regression')
 factor
 
@@ -83,73 +83,10 @@ factor$loadings
 factor$scores
 plot(factor$scores, cex=0)
 text(factor$scores, cex=0.5, labels=genename)
+
+
 #Okay thus plot is pretty interesting. We have three loose bunchings,
 #plus a couple of outliers
 
-#What happens if we change the numer of factors that we are considerng? That
-#example used 4 factors. What if we reduced this to 3?
-plot(factanal(tps,factors=2,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=2,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=3,scores='regression')
-factor
-
-factor$loadings
-
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
-#Okay yep the plot is pretty different. This MIGHT be more appropriate?
-#Will need to read up on the impact of changing the factors in pca factor analysis
-
-#What if we tried some more factors? Let's try 5
-plot(factanal(tps,factors=5,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=5,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=5,scores='regression')
-factor
-
-factor$loadings
-
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
-
-#Very different again. I'd say that 4 factors is the sweet spot. What about less factors though?
-#2 factors
-plot(factanal(tps,factors=2,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=2,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=2,scores='regression')
-factor
-
-factor$loadings
-
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
-#2 factors is pretty similar to 3 factors
-
-#1 factor
-plot(factanal(tps,factors=1,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=1,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=1,scores='regression')
-factor
-
-factor$loadings
-
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
-#data is just all over the place. I'd say 4 factors is the sweet spot!
-
-#What is we did 10 factors? (should theoretically explain all variance)
-plot(factanal(tps,factors=10,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=10,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=10,scores='regression')
-factor
-
-factor$loadings
-
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
 
 

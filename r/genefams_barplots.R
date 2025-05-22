@@ -10,6 +10,8 @@ library(readr)
 
 setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NSCI7915/Assessments/DataProject/data/raw")
 
+library(dplyr)
+
 pumpdata<- read_csv("abc_pumps.csv")
 View(pumpdata)
 
@@ -20,7 +22,7 @@ adeABC_data <- pumpdata %>%
   filter(family == "adeABC")
 
 # Calculate average logFC for each biocide
-library(dplyr)
+
 
 adeABC <- summarise(group_by(filter(pumpdata, family == "adeABC"), 
                              biocide), avg_adeABC_logFC = mean(logFC))
@@ -48,8 +50,8 @@ adeABC
 adeABC_vector <- as.numeric(adeABC[[2]])
 adeABC_vector
 
-Biocide_ID <- c("AgNO3","BZK","CHL","CRL","CTAB","EtOH","Glu","HClO","PVPi","TRC")
-adeABC_bar=barplot(adeABC_vector,beside=T,names.arg=Biocide_ID,col= c("purple"),
+Biocide_ID <- c("AgNO3","BZK","CHL","CRL","CTAB","EtOH","GLU","HClO","PVPi","TRC")
+adeABC_bar=barplot(adeABC_vector,beside=T,names.arg=Biocide_ID,col= c("maroon3"),
                    xlab= "Biocide",
                    ylab= "logFC",ylim=c(-12,4), width=0.2,
                    cex.names=0.8,main="adeABC")
@@ -241,14 +243,14 @@ pump.means = t(pump.means)
 pump.means
 
 pump.bar=barplot(pump.means,beside=T,names.arg=Biocide_ID, 
-                  col= c("purple", "aquamarine", "darkseagreen1", "coral"),
+                  col= c("maroon3", "aquamarine", "darkseagreen1", "coral"),
               xlab= "Biocide", 
               ylab= "logFC",ylim=c(-11,4), width=0.3, 
               cex.names=0.8, main="Impact of Biocides on ABC pumps")
 
 
 legend("bottomright",c("adeABC","adeIJK","znuABC","ttg2ABC"),
-       fill=c("purple", "aquamarine", "darkseagreen1", "coral"),cex=0.5)
+       fill=c("maroon3", "aquamarine", "darkseagreen1", "coral"),cex=0.5)
 
 #Now add error bars
 adeABC.pos <- pump.bar[c(1,5,9,13,17,21,25,29,33,37)]
@@ -271,6 +273,7 @@ arrows(x0 = ttg2ABC.pos,y0 = ttg2ABC.lowerci,x1 = ttg2ABC.pos,
 
 
 box()
+
 
 
 
