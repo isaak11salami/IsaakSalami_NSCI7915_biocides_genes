@@ -87,7 +87,7 @@ ttg2xtra
 ttg2xtra.bar=barplot(ttg2xtra,beside=T,names.arg=Biocide_ID, 
                  col= c("coral1", "chocolate1", "tan2","orange","yellow"),
                  xlab= "Biocide",ylab= "logFC",ylim=c(-1.5,1.5), width=0.3, 
-                 cex.names=0.8, main="Does BAL062_00181 fit with ttg2?")
+                 cex.names=0.8, main="Does BAL062_00181 fit with ttg2ABC?")
 legend("bottomright",c("ttg2A","ttg2B","ttg2C","mlaC","BAL062_00181"),
        fill=c("coral1", "chocolate1", "tan2","orange","yellow"),cex=0.5)
 box()
@@ -146,7 +146,130 @@ znuxtra
 znuxtra.bar=barplot(znuxtra,beside=T,names.arg=Biocide_ID, 
                      col= c("seagreen3", "palegreen", "springgreen2", "chartreuse","green1"),
                      xlab= "Biocide",ylab= "logFC",ylim=c(-1.5,3.5), width=0.3, 
-                     cex.names=0.8, main="Does BAL062_01982 fit with znu?")
-legend("bottomright",c("ttg2A","ttg2B","ttg2C","zur","BAL062_01982"),
+                     cex.names=0.8, main="Does BAL062_01982 fit with znuABC?")
+legend("bottomright",c("znuA","znuB","znuC","zur","BAL062_01982"),
        fill=c("seagreen3", "palegreen", "springgreen2", "chartreuse","green1"),cex=0.5)
 box()
+
+#Does BAL062_01982 look similar to adeABC
+
+#bind it all together
+ABCxtra <- cbind(adeA_vector,
+                 adeB_vector,
+                 adeC_vector,
+                 zur_vector,
+                 bal1982_vector)
+ABCxtra <- t(ABCxtra)
+ABCxtra
+
+#plot
+ABCxtra.bar=barplot(ABCxtra,beside=T,names.arg=Biocide_ID, 
+                    col= c("maroon", "orchid", "magenta","chartreuse","green1"),
+                    xlab= "Biocide",ylab= "logFC",ylim=c(-7,3.5), width=0.3, 
+                    cex.names=0.8, main="Do zur and BAL062_01982 fit with adeABC?")
+legend("bottomright",c("adeA","adeB","adeC","zur","BAL062_01982"),
+       fill=c("maroon", "orchid", "magenta","chartreuse","green1"),cex=0.5)
+box()
+
+#Does BAL062_01982 look similar to adeIJK
+
+#bind it all together
+IJKxtra <- cbind(adeI_vector,
+                 adeJ_vector,
+                 adeK_vector,
+                 zur_vector,
+                 bal1982_vector)
+IJKxtra <- t(IJKxtra)
+IJKxtra
+
+#plot
+IJKxtra.bar=barplot(IJKxtra,beside=T,names.arg=Biocide_ID, 
+                    col= c("skyblue", "aquamarine4", "turquoise","chartreuse","green1"),
+                    xlab= "Biocide",ylab= "logFC",ylim=c(-7,3.5), width=0.3, 
+                    cex.names=0.8, main="Do zur and BAL062_01982 fit with adeIJK?")
+legend("bottomright",c("adeI","adeJ","adeK","zur","BAL062_01982"),
+       fill=c("skyblue", "aquamarine4", "turquoise","chartreuse","green1"),cex=0.5)
+box()
+
+#Does BAL062_01982 look similar to ttg2ABC?
+
+#bind it all together
+ttg2xtra <- cbind(ttg2A_vector,
+                 ttg2B_vector,
+                 ttg2C_vector,
+                 zur_vector,
+                 bal1982_vector)
+ttg2xtra <- t(ttg2xtra)
+ttg2xtra
+
+#plot
+ttg2xtra.bar=barplot(ttg2xtra,beside=T,names.arg=Biocide_ID, 
+                    col= c("coral1", "chocolate1", "tan2","chartreuse","green1"),
+                    xlab= "Biocide",ylab= "logFC",ylim=c(-1.5,3.5), width=0.3, 
+                    cex.names=0.8, main="Do zur and BAL062_01982 fit with ttg2ABC?")
+legend("bottomright",c("ttg2A","ttg2B","ttg2C","zur","BAL062_01982"),
+       fill=c("coral1", "chocolate1", "tan2","chartreuse","green1"),cex=0.5)
+box()
+
+#Now let's look at BAL062_00181
+
+#Does BAL062_00181 look similar to adeABC
+
+#bind it all together
+ABCxtra2 <- cbind(adeA_vector,
+                 adeB_vector,
+                 adeC_vector,
+                 mlaC_vector,
+                 bal181_vector)
+ABCxtra2 <- t(ABCxtra2)
+ABCxtra2
+
+#plot
+ABCxtra2.bar=barplot(ABCxtra2,beside=T,names.arg=Biocide_ID, 
+                    col= c("maroon", "orchid", "magenta","orange","yellow"),
+                    xlab= "Biocide",ylab= "logFC",ylim=c(-7,2), width=0.3, 
+                    cex.names=0.8, main="Do mlaC and BAL062_00181 fit with adeABC?")
+legend("bottomright",c("adeA","adeB","adeC","mlaC","BAL062_00181"),
+       fill=c("maroon", "orchid", "magenta","orange","yellow"),cex=0.5)
+box()
+
+#Does BAL062_00181 look similar to adeIJK
+
+#bind it all together
+IJKxtra2 <- cbind(adeI_vector,
+                 adeJ_vector,
+                 adeK_vector,
+                 mlaC_vector,
+                 bal181_vector)
+IJKxtra2 <- t(IJKxtra2)
+IJKxtra2
+
+#plot
+IJKxtra2.bar=barplot(IJKxtra2,beside=T,names.arg=Biocide_ID, 
+                    col= c("skyblue", "aquamarine4", "turquoise","orange","yellow"),
+                    xlab= "Biocide",ylab= "logFC",ylim=c(-7,2), width=0.3, 
+                    cex.names=0.8, main="Do mlaC and BAL062_00181 fit with adeIJK?")
+legend("bottomright",c("adeI","adeJ","adeK","mlaC","BAL062_00181"),
+       fill=c("skyblue", "aquamarine4", "turquoise","orange","yellow"),cex=0.5)
+box()
+
+#Does BAL062_00181 look similar to znu?
+
+#bind it all together
+znuxtra2 <- cbind(znuA_vector,
+                 znuB_vector,
+                 znuC_vector,
+                 mlaC_vector,
+                 bal181_vector)
+znuxtra2 <- t(znuxtra2)
+znuxtra2
+
+#plot
+znuxtra2.bar=barplot(znuxtra2,beside=T,names.arg=Biocide_ID, 
+                    col= c("seagreen3", "palegreen", "springgreen2","orange","yellow"),
+                    xlab= "Biocide",ylab= "logFC",ylim=c(-1.5,3), width=0.3, 
+                    cex.names=0.8, main="Do mlaC and BAL062_00181  fit with znuABC?")
+legend("bottomright",c("znuA","znuB","znuC","mlaC","BAL062_00181"),
+       fill=c("seagreen3", "palegreen", "springgreen2","orange","yellow"),cex=0.5)
+box()
+
