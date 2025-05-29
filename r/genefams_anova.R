@@ -46,6 +46,9 @@ bm_tukey <- bm_tukey[c("comparison", "lwr", "upr", "p adj")]
 biomod_sigcompare <- bm_tukey[bm_tukey$`p adj` < 0.05, ]
 biomod_sigcompare
 
+write.csv(as.data.frame(biomod_sigcompare), 
+         "bmsig_tukey_sig.csv", row.names = FALSE)
+
 #Now let's look at logFC differences between our ABC transporters
 fammod <- aov(logFC~family, data=pumpdata)
 
@@ -107,4 +110,5 @@ write.csv(as.data.frame(interactionmod_sigcompare),
 #significant differences. Let's try visually representing these differences
 #in a barplot (new file tho)
 
+citation()
 
