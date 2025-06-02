@@ -246,7 +246,7 @@ pump.bar=barplot(pump.means,beside=T,names.arg=Biocide_ID,
                   col= c("maroon3", "aquamarine", "darkseagreen1", "coral"),
               xlab= "Biocide", 
               ylab= "logFC",ylim=c(-11,4), width=0.3, 
-              cex.names=0.8, main="Impact of Biocides on ABC pumps")
+              cex.names=0.8, main="Impact of Biocides on Transporter pumps")
 
 
 legend("bottomright",c("adeABC","adeIJK","znuABC","ttg2ABC"),
