@@ -73,16 +73,14 @@ text(princomp(tps)$loadings,labels=headers,xpd=NA)
 plot(princomp(tps)$scores,cex=0)
 text(princomp(tps)$scores,labels=genename,xpd=NA)
 
-plot(factanal(tps,factors=4,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=4,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=4,scores='regression')
-factor
+factor4=factanal(tps,factors=4,scores='regression')
+factor4
 
-factor$loadings
+factor4$loadings
 
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
+factor4$scores
+plot(factor4$scores, cex=0)
+text(factor4$scores, cex=0.5, labels=genename)
 
 
 #Okay thus plot is pretty interesting. We have three loose bunchings,

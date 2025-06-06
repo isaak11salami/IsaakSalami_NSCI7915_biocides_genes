@@ -1,4 +1,4 @@
-#Testing out Horan's Parallel analysis as an alternative to PCA scree plot
+#Testing out Horn's Parallel analysis as an alternative to PCA scree plot
 
 #Start by formatting the data using the same method employed in prep for
 #princom
@@ -90,13 +90,87 @@ text(factor$scores, cex=0.5, labels=genename)
 #Might be worth doing a bit of research into parallel analysis vs
 #princomp/scree plot 
 
-plot(factanal(tps,factors=4,scores='regression')$scores,cex=0)
-text(factanal(tps,factors=4,scores='regression')$scores,labels=genename,xpd=NA)
-factor=factanal(tps,factors=4,scores='regression')
-factor
 
-factor$loadings
+factor4=factanal(tps,factors=4,scores='regression')
+factor4
 
-factor$scores
-plot(factor$scores, cex=0)
-text(factor$scores, cex=0.5, labels=genename)
+factor4$loadings
+
+factor4$scores
+plot(factor4$scores, cex=0)
+text(factor4$scores, cex=0.5, labels=genename)
+
+#The test of hypothesis shows that 4 factors are not perfectly 
+#sufficient (72.5%, with p=0.0313). Therefore, we probs need one
+#more factor. This refelects the Horn's parallel analysis result
+
+#What about 5 factors?
+factor5=factanal(tps,factors=5,scores='regression')
+factor5
+
+factor5$scores
+plot(factor5$scores, cex=0)
+text(factor5$scores, cex=0.5, labels=genename)
+
+#Yep, 5 factors is technically significant. However, the plot
+#really isn't that helpful... Let's just stick with 4 factors
+
+#Okay, now let's add colours for the gene families
+
+ABCcol <- c("adeA", "adeB", "adeC")
+IJKcol <- c("adeI", "adeJ", "adeK")
+znucol2  <- c("znuA", "znuB", "znuC","zur")
+ttg2col2  <- c("ttg2A", "ttg2B", "ttg2C","mlaC")
+
+library(dplyr)
+
+
+gencol <- case_when(
+  genename %in% ABCcol ~ "maroon",
+  genename %in% IJKcol ~ "aquamarine3",
+  genename %in% znucol ~ "seagreen",
+  genename %in% ttg2col ~ "coral",
+  TRUE ~ "black"
+)
+
+
+plot(factor4$scores, cex=0)
+text(factor4$scores, cex=0.65, labels=genename, col=gencol)
+
+#Now let's make a version where the known associated genes are also highlighted
+
+znucol2  <- c("znuA", "znuB", "znuC","zur")
+ttg2col2  <- c("ttg2A", "ttg2B", "ttg2C","mlaC")
+
+
+gencol2 <- case_when(
+  genename %in% ABCcol ~ "maroon",
+  genename %in% IJKcol ~ "aquamarine3",
+  genename %in% znucol2 ~ "seagreen",
+  genename %in% ttg2col2 ~ "coral",
+  TRUE ~ "black"
+)
+
+plot(factor4$scores, cex=0)
+text(factor4$scores, cex=0.65, labels=genename, col=gencol2)
+
+# Calculate appropriate xlim and ylim
+x_range <- range(factor4$scores[,1])
+y_range <- range(factor4$scores[,2])
+
+# Expand the range by a small margin (e.g., 10%)
+x_margin <- diff(x_range) * 0.1
+y_margin <- diff(y_range) * 0.1
+
+# Set expanded limits
+xlim <- c(x_range[1] - x_margin, x_range[2] + x_margin)
+ylim <- c(y_range[1] - y_margin, y_range[2] + y_margin)
+
+# Create the plot with expanded limits
+plot(factor4$scores, cex = 0, xlim = xlim, ylim = ylim)
+
+# Add labels with custom colors
+text(factor4$scores, cex = 0.65, labels = genename, col = gencol2)
+
+# Add labels with custom colors
+text(factor4$scores, cex = 0.65, labels = genename, col = gencol)
