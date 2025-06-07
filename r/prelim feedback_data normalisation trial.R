@@ -36,8 +36,6 @@ anova(biomod)
 
 #Now let's try normalizing our data using John's method, using 
 #df=9
-n = qnorm(pt(biomod,9),9)
-plot(qnorm(biomod),sort(n))
 
 # Rank the logFC values
 ranks <- rank(pumpdata$logFC)

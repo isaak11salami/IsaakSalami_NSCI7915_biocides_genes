@@ -174,3 +174,27 @@ text(factor4$scores, cex = 0.65, labels = genename, col = gencol2)
 
 # Add labels with custom colors
 text(factor4$scores, cex = 0.65, labels = genename, col = gencol)
+
+#Generate plot for 5 factors as well
+plot(factor5$scores, cex=0)
+text(factor5$scores, cex=0.65, labels=genename, col=gencol)
+
+# Calculate appropriate xlim and ylim
+x_range <- range(factor5$scores[,1])
+y_range <- range(factor5$scores[,2])
+
+# Expand the range by a small margin (e.g., 10%)
+x_margin <- diff(x_range) * 0.1
+y_margin <- diff(y_range) * 0.1
+
+# Set expanded limits
+xlim <- c(x_range[1] - x_margin, x_range[2] + x_margin)
+ylim <- c(y_range[1] - y_margin, y_range[2] + y_margin)
+
+# Create the plot with expanded limits
+plot(factor5$scores, cex = 0, xlim = xlim, ylim = ylim)
+
+# Add labels with custom colors
+text(factor5$scores, cex = 0.65, labels = genename, col = gencol)
+
+
