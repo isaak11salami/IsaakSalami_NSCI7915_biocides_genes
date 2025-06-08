@@ -5,7 +5,7 @@ library(readr)
 
 setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NSCI7915/Assessments/DataProject/data/raw")
 
-pumpdata<- read_csv("abc_pumps.csv")
+pumpdata<- read_csv("tps.csv")
 View(pumpdata)
 
 #Effect of biocides
@@ -41,6 +41,7 @@ bm_tukey$comparison <- rownames(bm_tukey)
 # Reorder columns if desired
 bm_tukey <- bm_tukey[c("comparison", "lwr", "upr", "p adj")]
 
+
 #There is a lot of comparisons happening here. Let's filter to return
 #only those with a p.adj < 0.05 (code from QwenAI)
 biomod_sigcompare <- bm_tukey[bm_tukey$`p adj` < 0.05, ]
@@ -73,42 +74,9 @@ fm_tukey <- fm_tukey[c("comparison", "lwr", "upr", "p adj")]
 fammod_sigcompare <- fm_tukey[fm_tukey$`p adj` < 0.05, ]
 fammod_sigcompare
 
+fm_tukey
 
-#Now let's look for interaction between ABC pumps and biocide (do the 
-#biocides impact certain pumps in a unique manner?)
-biofam <- aov(logFC~family*biocide, data=pumpdata)
 
-#Check Assumptions
-#1) Homogeneity of Variance, via...
-#Levene Test
-leveneTest(biofam)
-#Passes the Levene's Test!
-
-#Plot Residuals against Fitted values
-plot(biofam)
-
-#2) Normality of Variance, via...
-#Q-Q plot
-plot(biofam)
-
-anova(biofam)
-
-#TukeyHSD to look at comparisons between the interaction groups (aidded by QwenAI)
-pumpdata$interaction <- interaction(pumpdata$family, pumpdata$biocide, sep = "-")
-interactionmod <- aov(logFC ~ interaction, data = pumpdata)
-interactionmod_tukey <- TukeyHSD(interactionmod)
-interactionmod_tukey
-im_tukey <- as.data.frame(interactionmod_tukey$interaction)
-im_tukey$comparison <- rownames(im_tukey)
-im_tukey <- im_tukey[c("comparison", "lwr", "upr", "p adj")]
-interactionmod_sigcompare <- im_tukey[im_tukey$`p adj` < 0.05, ]
-interactionmod_sigcompare
-write.csv(as.data.frame(interactionmod_sigcompare), 
-          "interaction_tukey_sig.csv", row.names = FALSE)
-
-#Okay, this is a little hard to interpret. Looks like we have a lot of
-#significant differences. Let's try visually representing these differences
-#in a barplot (new file tho)
 
 citation()
 

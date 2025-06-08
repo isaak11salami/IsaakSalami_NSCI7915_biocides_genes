@@ -18,7 +18,7 @@ plot(qnorm(1:10000 / 10001),sort(x))
 #Importing data
 library(readr)
 setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NSCI7915/Assessments/DataProject/data/raw")
-pumpdata<- read_csv("abc_pumps.csv")
+pumpdata<- read_csv("tps.csv")
 View(pumpdata)
 #Effect of biocides
 biomod <- aov(logFC~biocide, data=pumpdata)

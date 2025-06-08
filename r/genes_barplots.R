@@ -12,7 +12,7 @@ setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NS
 
 library(dplyr)
 
-pumpdata<- read_csv("abc_pumps.csv")
+pumpdata<- read_csv("tps.csv")
 View(pumpdata)
 
 Biocide_ID <- c("AgNO3","BZK","CHL","CRL","CTAB","EtOH","GLU","HClO","PVPi","TRC")
@@ -54,7 +54,7 @@ ABC.bar=barplot(ABC,beside=T,names.arg=Biocide_ID,
                 xlab= "Biocide",ylab= "logFC",ylim=c(-7,3), width=0.3, 
                  cex.names=0.8, main="Response of adeABC genes")
 legend("bottomright",c("adeA","adeB","adeC"),
-       fill=c("maroon", "orchid", "magenta"),cex=0.5)
+       fill=c("maroon", "orchid", "magenta"),cex=0.8)
 box()
 
 #Now let's do the same for the adeIJK genes
@@ -93,7 +93,7 @@ IJK.bar=barplot(IJK,beside=T,names.arg=Biocide_ID,
                 xlab= "Biocide",ylab= "logFC",ylim=c(-7,3), width=0.3, 
                 cex.names=0.8, main="Response of adeIJK genes")
 legend("bottomright",c("adeI","adeJ","adeK"),
-       fill=c("skyblue", "aquamarine4", "turquoise"),cex=0.5)
+       fill=c("skyblue", "aquamarine4", "turquoise"),cex=0.8)
 box()
 
 #znuABC
@@ -133,7 +133,7 @@ znu.bar=barplot(znu,beside=T,names.arg=Biocide_ID,
                 xlab= "Biocide",ylab= "logFC",ylim=c(-1.5,3), width=0.3, 
                 cex.names=0.8, main="Response of znuABC genes")
 legend("bottomright",c("znuA","znuB","znuC"),
-       fill=c("seagreen3", "palegreen", "springgreen2"),cex=0.5)
+       fill=c("seagreen3", "palegreen", "springgreen2"),cex=0.8)
 box()
 
 #ttg2ABC
@@ -173,7 +173,7 @@ ttg2.bar=barplot(ttg2,beside=T,names.arg=Biocide_ID,
                 xlab= "Biocide",ylab= "logFC",ylim=c(-1.5,1.5), width=0.3, 
                 cex.names=0.8, main="Response of ttg2ABC genes")
 legend("bottomright",c("ttg2A","ttg2B","ttg2C"),
-       fill=c("coral1", "chocolate1", "tan2"),cex=0.5)
+       fill=c("coral1", "chocolate1", "tan2"),cex=0.8)
 box()
 
 

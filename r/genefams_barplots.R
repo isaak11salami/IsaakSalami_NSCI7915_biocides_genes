@@ -12,7 +12,7 @@ setwd("/Users/isaak/OneDrive/Documents/Uni/2025/Session 1/Scientific Analysis_NS
 
 library(dplyr)
 
-pumpdata<- read_csv("abc_pumps.csv")
+pumpdata<- read_csv("tps.csv")
 View(pumpdata)
 
 #Following code was QwenAI
